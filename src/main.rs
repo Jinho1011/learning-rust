@@ -13,7 +13,10 @@ fn main() {
         let mut guess = String::new();
         stdin().read_line(&mut guess)
             .expect("Failed to read line");
-        let guess: i32 = guess.trim().parse().unwrap();
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue
+        };
 
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Less"),
